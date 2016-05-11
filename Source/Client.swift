@@ -228,6 +228,13 @@ enum SpaceBunnyError: ErrorType {
     }
   }
 
+  /**
+   Disconnect from the platform
+   */
+  public func disconnect() {
+    mqttClient?.disconnect()
+  }
+
   func endpointURL() -> NSURL? {
     let components = NSURLComponents()
     components.scheme = endpointScheme
