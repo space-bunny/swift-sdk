@@ -1,0 +1,6 @@
+framework module Pods_SpaceBunny {
+  umbrella header "Pods-SpaceBunny-umbrella.h"
+
+  export *
+  module * { export * }
+}

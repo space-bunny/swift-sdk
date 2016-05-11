@@ -1,0 +1,6 @@
+framework module SpaceBunny {
+  umbrella header "SpaceBunny-umbrella.h"
+
+  export *
+  module * { export * }
+}
