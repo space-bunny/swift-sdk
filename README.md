@@ -18,7 +18,7 @@ pod 'SpaceBunny'
 ###Connection
 Configure the instance of the SpaceBunny's `Client` with a valid Device Key:
 ```swift
-let client = Client(deviceKey: "some-device-key")
+let client = SpaceBunnyClient(deviceKey: "some-device-key")
 ```
 Set up the client if needed:
 ```swift
@@ -59,22 +59,22 @@ do {
 ###Delegate methods
 ```swift
 // Called when a connection to the platform is established
-func client(client: Client, didConnectTo host: String, port: Int)
+func spaceBunnyClient(client: SpaceBunnyClient, didConnectTo host: String, port: Int)
    
 // Called when a connection to the platform is ended or failed
-func client(client: Client, didDisconnectWithError error: NSError?)
+func spaceBunnyClient(client: SpaceBunnyClient, didDisconnectWithError error: NSError?)
    
 // Called when a new message is received on the device's inbox
-func client(client: Client, didReceiveMessage message: String?, topic: String)
+func spaceBunnyClient(client: SpaceBunnyClient, didReceiveMessage message: String?, topic: String)
    
 // Called when a new message is sent
-func client(client: Client, didPublishMessage message: String?, topic: String)
+func spaceBunnyClient(client: SpaceBunnyClient, didPublishMessage message: String?, topic: String)
    
 // Called when a the client subscribes to the device's inbox
-func clientDidSubscribe(client: Client)
+func spaceBunnyClientiDidSubscribe(client: SpaceBunnyClient)
 
 // Called when a the client unsubscribes from the device's inbox
-func clientDidUnsubscribe(client: Client)
+func spaceBunnyClientDidUnsubscribe(client: SpaceBunnyClient)
 ```
 
 ## License
