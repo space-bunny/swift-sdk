@@ -1,0 +1,4 @@
+github "robbiehanson/CocoaAsyncSocket" "562bae6af6dbd7e1891293dae20b9f79a2fd7228"
+github "emqtt/CocoaMQTT" "a7337965aef6c72ad98e6d45a5cbe6d718e65fb5"
+github "andreamazz/MSWeakTimer" "6f121938564ecda76bfdeb9b3f23243eabb605f0"
+github "Hearst-DD/ObjectMapper" "1.2.0"

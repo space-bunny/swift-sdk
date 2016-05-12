@@ -14,6 +14,7 @@
 		6579FBEF1CDF79CA0061F94F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6579FBEE1CDF79CA0061F94F /* Assets.xcassets */; };
 		6579FBF21CDF79CA0061F94F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6579FBF01CDF79CA0061F94F /* LaunchScreen.storyboard */; };
 		6579FBFD1CDF79CA0061F94F /* SpaceBunnyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6579FBFC1CDF79CA0061F94F /* SpaceBunnyTests.swift */; };
+		65E8248E1CE4B01000239663 /* SpaceBunny.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E8248D1CE4B01000239663 /* SpaceBunny.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		6579FBF81CDF79CA0061F94F /* SpaceBunnyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceBunnyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6579FBFC1CDF79CA0061F94F /* SpaceBunnyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceBunnyTests.swift; sourceTree = "<group>"; };
 		6579FBFE1CDF79CA0061F94F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65E8248D1CE4B01000239663 /* SpaceBunny.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpaceBunny.framework; path = "../../../../Library/Developer/Xcode/DerivedData/SpaceBunny-fdrmsjirbaxvujgwgrgzyloatqko/Build/Products/Debug-iphonesimulator/SpaceBunny.framework"; sourceTree = "<group>"; };
 		BA6EEE90FAF688E757FAA0D9 /* Pods-SpaceBunny.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaceBunny.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpaceBunny/Pods-SpaceBunny.debug.xcconfig"; sourceTree = "<group>"; };
 		BD73FE09455E6D7739923DE0 /* Pods_SpaceBunny.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpaceBunny.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -55,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65E8248E1CE4B01000239663 /* SpaceBunny.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +120,7 @@
 		9B4A5196C0FE814F57881D7E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65E8248D1CE4B01000239663 /* SpaceBunny.framework */,
 				BD73FE09455E6D7739923DE0 /* Pods_SpaceBunny.framework */,
 			);
 			name = Frameworks;
@@ -432,7 +436,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.spacebunny.SpaceBunnyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpaceBunny.app/SpaceBunny";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpaceBunnyDemo.app/SpaceBunnyDemo";
 			};
 			name = Debug;
 		};
@@ -444,7 +448,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.spacebunny.SpaceBunnyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpaceBunny.app/SpaceBunny";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpaceBunnyDemo.app/SpaceBunnyDemo";
 			};
 			name = Release;
 		};
