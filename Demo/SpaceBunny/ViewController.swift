@@ -16,7 +16,9 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+  }
 
+  func connectAndSubscribe() {
     // Set the SpaceBunnyDelegate
     client.delegate = self
 
@@ -40,6 +42,10 @@ class ViewController: UIViewController {
     } catch {
       print("no connection")
     }
+  }
+
+  @IBAction func connectAction() {
+    connectAndSubscribe()
   }
 
   @IBAction func buttonAction() {

@@ -5,6 +5,6 @@ target 'SpaceBunny' do
 end
 
 target 'SpaceBunnyTests' do
-
+  pod 'Mockingjay'
 end
 

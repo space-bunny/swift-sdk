@@ -9,13 +9,22 @@ PODS:
   - CocoaMQTT (1.0.5):
     - CocoaAsyncSocket (~> 7.4.2)
     - MSWeakTimer (~> 1.1.0)
+  - Mockingjay (1.2.1):
+    - Mockingjay/Core (= 1.2.1)
+    - Mockingjay/XCTest (= 1.2.1)
+  - Mockingjay/Core (1.2.1):
+    - URITemplate (~> 1.3)
+  - Mockingjay/XCTest (1.2.1):
+    - Mockingjay/Core
   - MSWeakTimer (1.1.0)
   - ObjectMapper (1.2.0)
   - SpaceBunny (0.0.1):
     - CocoaMQTT (~> 1.0.5)
     - ObjectMapper (~> 1.2)
+  - URITemplate (1.3.1)
 
 DEPENDENCIES:
+  - Mockingjay
   - SpaceBunny (from `../`)
 
 EXTERNAL SOURCES:
@@ -25,8 +34,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   CocoaAsyncSocket: a18c75dca4b08723628a0bacca6e94803d90be91
   CocoaMQTT: 31dfd6180af49cd82852d739e83b4ef0fa74f199
+  Mockingjay: cc4249c2ed9b21fbc9adabf6329d7473212b4251
   MSWeakTimer: 9426150f933b80ed3acf3f6d228e4b61f0e303c8
   ObjectMapper: b1e9c7c8a9f6400b72690c80072c131504caa66f
   SpaceBunny: 7c1acd83271c91c9d02bbeaf5277160b775a0435
+  URITemplate: 398a48d6559e23b77bd41176b675b017ad1fc959
 
 COCOAPODS: 0.39.0

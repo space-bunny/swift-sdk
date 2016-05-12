@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,9 +18,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uew-kp-Whc">
+                                <rect key="frame" x="20" y="28" width="560" height="40"/>
+                                <color key="backgroundColor" red="0.51764705879999995" green="0.74901960779999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3Vf-nS-qi8"/>
+                                </constraints>
+                                <state key="normal" title="Connect">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="connectAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="0hd-w7-QGr"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l6T-1W-Pqn">
-                                <rect key="frame" x="277" y="285" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="20" y="76" width="560" height="40"/>
+                                <color key="backgroundColor" red="0.33725490200000002" green="0.60392156860000001" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="PIv-WS-Ixf"/>
+                                </constraints>
+                                <state key="normal" title="Send message">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="buttonAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="RD9-ug-kmF"/>
                                 </connections>
@@ -27,13 +47,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="l6T-1W-Pqn" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="9La-YA-j3r"/>
-                            <constraint firstItem="l6T-1W-Pqn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YeC-n2-t9o"/>
+                            <constraint firstItem="l6T-1W-Pqn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="4Zn-qo-Ks9"/>
+                            <constraint firstItem="uew-kp-Whc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="dqo-cU-vzv"/>
+                            <constraint firstItem="uew-kp-Whc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="fLC-x3-xVW"/>
+                            <constraint firstItem="l6T-1W-Pqn" firstAttribute="top" secondItem="uew-kp-Whc" secondAttribute="bottom" constant="8" id="j4l-Kh-4hL"/>
+                            <constraint firstItem="uew-kp-Whc" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="jWZ-0M-HcP"/>
+                            <constraint firstItem="l6T-1W-Pqn" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="zHF-Oj-XCO"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="435" y="269"/>
         </scene>
     </scenes>
 </document>
