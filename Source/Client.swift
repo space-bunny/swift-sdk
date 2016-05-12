@@ -116,23 +116,37 @@ enum SpaceBunnyError: ErrorType {
    - parameter endpointUrl: Optional endpoint URL
    - parameter endpointPort: Optional endpoint URL port
    */
-  public convenience init(deviceKey: String, endpointScheme: String = EndpointScheme, endpointUrl: String = EndpointUrl, endpointPort: Int? = nil) {
+  public convenience init(deviceKey: String, endpointScheme: String, endpointUrl: String, endpointPort: NSNumber?) {
     self.init()
 
     self.endpointURLString = endpointUrl
-    self.endpointPort = endpointPort
+    self.endpointPort = endpointPort?.integerValue
     self.endpointScheme = endpointScheme
     self.deviceKey = deviceKey
   }
 
   /**
-   Connect to the platform. The connection process retrieves the device configurations, the channels list and 
+   Convenience initializer. A valid device key must be provided. Get a valid device key on your
+   SpaceBunny's dashboard (http://spacebunny.io).
+
+   - parameter deviceKey: The device key
+   */
+  public convenience init(deviceKey: String) {
+    self.init()
+
+    self.endpointURLString = EndpointUrl
+    self.endpointScheme = EndpointScheme
+    self.deviceKey = deviceKey
+  }
+
+  /**
+   Connect to the platform. The connection process retrieves the device configurations, the channels list and
    establishes a MQTT connection.
 
    - parameter completion: A block called when the connection is established. 
    If the connection failed, a non nil error is provided
    */
-  public func connect(completion: (NSError? -> Void)? = nil) {
+  public func connect(completion: ((NSError?) -> Void)? = nil) {
     guard let url = endpointURL() else { return }
 
     let request = NSMutableURLRequest(URL: url)
