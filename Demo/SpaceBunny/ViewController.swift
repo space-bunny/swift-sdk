@@ -12,7 +12,7 @@ import SpaceBunny
 class ViewController: UIViewController {
 
   // Create a client with a given device key. Get your key from your SpaceBunny's dashboard
-  let client = Client(deviceKey: "d4aadd1a-a2a1-4e71-a2fa-52c03a1f702b:DSs4KZ7M9yrj74KVksXK8Q")
+  let client = SpaceBunnyClient(deviceKey: "d4aadd1a-a2a1-4e71-a2fa-52c03a1f702b:DSs4KZ7M9yrj74KVksXK8Q")
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -57,11 +57,11 @@ class ViewController: UIViewController {
 
 extension ViewController: SpaceBunnyDelegate {
 
-  func client(client: Client, didConnectTo host: String, port: Int) {
+  func spaceBunnyClient(client: SpaceBunnyClient, didConnectTo host: String, port: Int) {
     print("Connection successful")
   }
 
-  func client(client: Client, didDisconnectWithError error: NSError?) {
+  func spaceBunnyClient(client: SpaceBunnyClient, didDisconnectWithError error: NSError?) {
     print("Disconnected")
     if let error = error {
       print("With error: \(error)")

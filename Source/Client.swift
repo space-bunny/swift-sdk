@@ -31,58 +31,58 @@ enum SpaceBunnyError: ErrorType {
   /**
  Called when a connection to the platform is established
    
-   - parameter client: the Client instance
+   - parameter client: the SpaceBunnyClient instance
    - parameter host: the connection host
    - parameter host: the connection port
  */
-  optional func client(client: Client, didConnectTo host: String, port: Int)
+  optional func spaceBunnyClient(client: SpaceBunnyClient, didConnectTo host: String, port: Int)
 
   /**
    Called when a connection to the platform is ended or failed
 
-   - parameter client: the Client instance
+   - parameter client: the SpaceBunnyClient instance
    - parameter error: the error
    */
-  optional func client(client: Client, didDisconnectWithError error: NSError?)
+  optional func spaceBunnyClient(client: SpaceBunnyClient, didDisconnectWithError error: NSError?)
 
   /**
    Called when a new message is received on the device's inbox
 
-   - parameter client: the Client instance
+   - parameter client: the SpaceBunnyClient instance
    - parameter message: the message
    - parameter topic: the topic
    */
-  optional func client(client: Client, didReceiveMessage message: String?, topic: String)
+  optional func spaceBunnyClient(client: SpaceBunnyClient, didReceiveMessage message: String?, topic: String)
 
   /**
    Called when a new message is sent
 
-   - parameter client: the `Client` instance
+   - parameter client: the `SpaceBunnyClient` instance
    - parameter message: the message
    - parameter topic: the topic
    */
-  optional func client(client: Client, didPublishMessage message: String?, topic: String)
+  optional func spaceBunnyClient(client: SpaceBunnyClient, didPublishMessage message: String?, topic: String)
 
   /**
    Called when a the client subscribes to the device's inbox
 
-   - parameter client: the Client instance
+   - parameter client: the SpaceBunnyClient instance
    */
-  optional func clientDidSubscribe(client: Client)
+  optional func spaceBunnyClientDidSubscribe(client: SpaceBunnyClient)
 
   /**
    Called when a the client unsubscribes from the device's inbox
 
-   - parameter client: the Client instance
+   - parameter client: the SpaceBunnyClient instance
    */
-  optional func clientDidUnsubscribe(client: Client)
+  optional func spaceBunnyClientDidUnsubscribe(client: SpaceBunnyClient)
 }
 
 /**
  SpaceBunny Client for device communications. It represents a single device and is used to
  send data on the device channels and subscribe to the device's inbox.
  */
-@objc public class Client: NSObject {
+@objc public class SpaceBunnyClient: NSObject {
 
   private var endpointScheme = ""
   private var endpointURLString = ""
@@ -91,7 +91,7 @@ enum SpaceBunnyError: ErrorType {
   private var onReceive: ((String?, String) -> Void)? = nil
   private var onConnect: (NSError? -> Void)? = nil
 
-  /// The device key. It must be set in the `Client` initializer
+  /// The device key. It must be set in the `SpaceBunnyClient` initializer
   public private(set) var deviceKey: String?
 
   /// And array of `Channels` associated with the device. The information is retrieved upon connection
@@ -103,7 +103,7 @@ enum SpaceBunnyError: ErrorType {
   /// Enables the secure connection to the platform
   public var useSSL = false
 
-  /// The Client delegate
+  /// The SpaceBunnyClient delegate
   public var delegate: SpaceBunnyDelegate?
 
   /**
@@ -278,31 +278,31 @@ enum SpaceBunnyError: ErrorType {
 
 }
 
-extension Client: CocoaMQTTDelegate {
+extension SpaceBunnyClient: CocoaMQTTDelegate {
   public func mqtt(mqtt: CocoaMQTT, didConnect host: String, port: Int) {
     onConnect?(nil)
-    delegate?.client?(self, didConnectTo: host, port: port)
+    delegate?.spaceBunnyClient?(self, didConnectTo: host, port: port)
   }
 
   public func mqtt(mqtt: CocoaMQTT, didPublishMessage message: CocoaMQTTMessage, id: UInt16) {
-    delegate?.client?(self, didPublishMessage: message.string, topic: message.topic)
+    delegate?.spaceBunnyClient?(self, didPublishMessage: message.string, topic: message.topic)
   }
 
   public func mqtt(mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {
     onReceive?(message.string, message.topic)
-    delegate?.client?(self, didReceiveMessage: message.string, topic: message.topic)
+    delegate?.spaceBunnyClient?(self, didReceiveMessage: message.string, topic: message.topic)
   }
 
   public func mqtt(mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
-    delegate?.clientDidSubscribe?(self)
+    delegate?.spaceBunnyClientDidSubscribe?(self)
   }
 
   public func mqtt(mqtt: CocoaMQTT, didUnsubscribeTopic topic: String) {
-    delegate?.clientDidUnsubscribe?(self)
+    delegate?.spaceBunnyClientDidUnsubscribe?(self)
   }
 
   public func mqttDidDisconnect(mqtt: CocoaMQTT, withError err: NSError?) {
-    delegate?.client?(self, didDisconnectWithError: err)
+    delegate?.spaceBunnyClient?(self, didDisconnectWithError: err)
   }
 
   public func mqtt(mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {}
