@@ -87,7 +87,7 @@ enum SpaceBunnyError: ErrorType {
   private var endpointScheme = ""
   private var endpointURLString = ""
   private var endpointPort: Int?
-  private var mqttClient: CocoaMQTT?
+  internal var mqttClient: CocoaMQTT?
   private var onReceive: ((String?, String) -> Void)? = nil
   private var onConnect: (NSError? -> Void)? = nil
 

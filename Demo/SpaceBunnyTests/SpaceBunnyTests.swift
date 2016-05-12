@@ -8,6 +8,34 @@
 
 import XCTest
 @testable import SpaceBunny
+import CocoaMQTT
+
+class MockMQTTClient: CocoaMQTT {
+
+  var expectedState = CocoaMQTTConnState.CONNECTED
+
+  override func subscribe(topic: String, qos: CocoaMQTTQOS) -> UInt16 {
+    return 0
+  }
+
+  override func publish(topic: String, withString string: String, qos: CocoaMQTTQOS, retained: Bool, dup: Bool) -> UInt16 {
+    return 0
+  }
+
+  override var connState: CocoaMQTTConnState {
+    get {
+      return expectedState
+    }
+    set { }
+  }
+
+}
+
+class MockClient: SpaceBunnyClient {
+  override func mqttConnect(completion: (NSError? -> Void)?) {
+    self.mqttClient = MockMQTTClient(clientId: "")
+  }
+}
 
 class SpaceBunnyTests: XCTestCase {
     
@@ -21,7 +49,7 @@ class SpaceBunnyTests: XCTestCase {
     
     func testExample() {
       let client = SpaceBunnyClient(deviceKey: "")
-      assert(client == client)
+      XCTAssertTrue(client == client)
     }
 
 }
