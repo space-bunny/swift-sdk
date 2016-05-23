@@ -3,7 +3,7 @@ import ObjectMapper
 import CocoaMQTT
 
 let EndpointScheme = "https"
-let EndpointUrl = "api.demo.spacebunny.io"
+let EndpointUrl = "api.spacebunny.io"
 
 /// Exception raised by SpaceBunny's `Client`
 enum SpaceBunnyError: ErrorType {
@@ -116,9 +116,7 @@ enum SpaceBunnyError: ErrorType {
    - parameter endpointUrl: Optional endpoint URL
    - parameter endpointPort: Optional endpoint URL port
    */
-  public convenience init(deviceKey: String, endpointScheme: String, endpointUrl: String, endpointPort: NSNumber?) {
-    self.init()
-
+  public init(deviceKey: String, endpointScheme: String, endpointUrl: String, endpointPort: NSNumber?) {
     self.endpointURLString = endpointUrl
     self.endpointPort = endpointPort?.integerValue
     self.endpointScheme = endpointScheme
@@ -131,9 +129,7 @@ enum SpaceBunnyError: ErrorType {
 
    - parameter deviceKey: The device key
    */
-  public convenience init(deviceKey: String) {
-    self.init()
-
+  public init(deviceKey: String) {
     self.endpointURLString = EndpointUrl
     self.endpointScheme = EndpointScheme
     self.deviceKey = deviceKey

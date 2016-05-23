@@ -209,7 +209,7 @@
 		46679A264198EAE1C02CDC872BD56D58 /* Pods-SpaceBunnyTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SpaceBunnyTests-umbrella.h"; sourceTree = "<group>"; };
 		46A2F660F8773D60D0B442A2B91B7DE0 /* CocoaMQTT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoaMQTT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A38DB3F0D3282648609D3C3E32822F1 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoaAsyncSocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4DEAA17507E9C04B33D4BB340A688E6A /* Channel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		4DEAA17507E9C04B33D4BB340A688E6A /* Channel.swift */ = {isa = PBXFileReference; includeInIndex = 1; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5129B7329DA58BB475345708FB27765D /* CocoaMQTT.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = CocoaMQTT.modulemap; sourceTree = "<group>"; };
 		527E2E5FCA5E9B5BDA73370CB6874EE3 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55BFD98936E335B5BE4B6D547CE46C10 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -230,7 +230,7 @@
 		687C11F5728A1D49D589D65C91B8AEE4 /* TransformOf.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransformOf.swift; path = ObjectMapper/Transforms/TransformOf.swift; sourceTree = "<group>"; };
 		6A1D5654BB16121795A9ED691DF8E0D2 /* MSWeakTimer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = MSWeakTimer.modulemap; sourceTree = "<group>"; };
 		6A972854AD8B41CC2BBB1BF9A488CFB8 /* CocoaMQTT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoaMQTT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6B93B77026147EED7FDF6D5B92528ACF /* Configuration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		6B93B77026147EED7FDF6D5B92528ACF /* Configuration.swift */ = {isa = PBXFileReference; includeInIndex = 1; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; tabWidth = 2; };
 		6CE9542E8C0436A8C7FFC68D098D9095 /* ISO8601DateTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ISO8601DateTransform.swift; path = ObjectMapper/Transforms/ISO8601DateTransform.swift; sourceTree = "<group>"; };
 		70706453E5150580546C7E9961DCDDCA /* Pods_SpaceBunny.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpaceBunny.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C619FA52F86C10097977137520D132 /* ObjectMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -512,7 +512,9 @@
 				06545CFDEBBD2AB32EA036AAE60F5D32 /* Products */,
 				ED19B1607DED1D969AD08B32DD845607 /* Targets Support Files */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		81254F7BF2D32AB67B2FFF99860330F7 /* Support Files */ = {
 			isa = PBXGroup;
