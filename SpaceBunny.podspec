@@ -3,7 +3,8 @@ Pod::Spec.new do |s|
   s.version      = "0.1.0"
   s.summary      = "Official Swift SDK for SpaceBunny (http://spacebunny.io)"
   s.description  = <<-DESC
-                    Official SDK for SpaceBunny
+                    Official SpaceBunny's SDK for iOS. Used to connect and communicate with the platform. 
+                    The library offers a client that allows to send messages and subscribe to the device inbox.
                    DESC
   s.homepage     = "https://github.com/space-bunny/Swift-sdk"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
