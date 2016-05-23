@@ -22,21 +22,43 @@ public class Configuration: Mappable {
   /// vHost for the MQTT connection
   public var vhost: String?
 
-  public required init(host: String, username: String, password: String, port: UInt, vhost: String) {
+  /**
+   Manually create a new Configuration
+
+   - parameter host: The connection host
+   - parameter username: The connection username
+   - parameter password: The connection password
+   - parameter name: The device name
+   - parameter port: The connection port
+   - parameter sslport: The secure connection port
+   - parameter vhost: The connection vHost
+   */
+  public required init(host: String, username: String, password: String, name: String, port: UInt, sslport: UInt, vhost: String) {
     self.host = host
     self.username = username
     self.password = password
+    self.name = name
     self.port = port
-    self.sslport = port
+    self.sslport = sslport
     self.vhost = vhost
   }
 
+  /**
+   ObjectMapper constructor
+   
+   - parameter map: The Map object
+   */
   public required init?(_ map: Map) {
     mapping(map)
   }
 
   // MARK: - API Mapping
 
+  /**
+   ObjectMapper mapping
+
+   - parameter map: The Map object
+   */
   public func mapping(map: Map) {
     host <- map["host"]
     username <- map["device_id"]

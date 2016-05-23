@@ -12,12 +12,22 @@ public class Channel: Mappable {
   /// The channel name
   var name: String?
 
+  /**
+   ObjectMapper constructor
+
+   - parameter map: The Map object
+   */
   public required init?(_ map: Map) {
     mapping(map)
   }
 
   // MARK: - API Mapping
 
+  /**
+   ObjectMapper mapping
+
+   - parameter map: The Map object
+   */
   public func mapping(map: Map) {
     id <- map["id"]
     name <- map["name"]

@@ -12,7 +12,7 @@ import SpaceBunny
 class ViewController: UIViewController {
 
   // Create a client with a given device key. Get your key from your SpaceBunny's dashboard
-  let client = SpaceBunnyClient(deviceKey: "d4aadd1a-a2a1-4e71-a2fa-52c03a1f702b:DSs4KZ7M9yrj74KVksXK8Q")
+  let client = SpaceBunnyClient(deviceKey: "1377cd37-dae6-4a44-b1b9-478c32df2f23:xT6JysSZsMWyVM5EtU8_nw")
 
   override func viewDidLoad() {
     super.viewDidLoad()

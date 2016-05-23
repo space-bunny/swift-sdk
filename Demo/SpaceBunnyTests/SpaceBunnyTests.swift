@@ -48,7 +48,6 @@ class MockClient: SpaceBunnyClient {
   }
 
   override func mqttConnect(completion: (NSError? -> Void)?) {
-    print("override")
     self.mqttClient = MockMQTTClient(expectedState: expectedState)
     completion?(nil)
   }
@@ -59,8 +58,8 @@ class SpaceBunnyTests: XCTestCase {
   func successMock() {
     let protocols = ["mqtt": ["port": 1883, "ssl_port": 8883]]
     let channels = [[ "id": "12345", "name": "data" ], [ "id": "54321", "name": "alarms" ]]
-    let config = ["host": "mock.host", "device_id": "device", "device_name": "Some device", "secret": "s3cr3t", "vhost": "mock.vhost", "protocols": protocols, "channels": channels]
-    let body = [ "connection": config ]
+    let config = ["host": "mock.host", "device_id": "device", "device_name": "Some device", "secret": "s3cr3t", "vhost": "mock.vhost", "protocols": protocols]
+    let body = [ "connection": config, "channels": channels ]
     stub(http(.GET, uri: "https://api.spacebunny.io/v1/device_configurations"), builder: json(body))
   }
 
@@ -90,6 +89,10 @@ class SpaceBunnyTests: XCTestCase {
       XCTAssertTrue(client.configuration?.name == "Some device")
       XCTAssertTrue(client.configuration?.port == 1883)
       XCTAssertTrue(client.configuration?.sslport == 8883)
+      XCTAssertTrue(client.channels?.count == 2)
+      let channel = client.channels?.first
+      XCTAssertTrue(channel?.name == "data")
+      XCTAssertTrue(channel?.id == "12345")
       expectation.fulfill()
     }
     self.waitForExpectationsWithTimeout(0.5, handler: nil)
@@ -121,6 +124,21 @@ class SpaceBunnyTests: XCTestCase {
       expectation.fulfill()
     }
     self.waitForExpectationsWithTimeout(0.5, handler: nil)
+  }
+
+}
+
+class ConfigurationTests: XCTestCase {
+
+  func testCreateManually() {
+    let subject = Configuration(host: "host", username: "username", password: "password", name: "name", port: 1883, sslport: 8883, vhost: "vhost")
+    XCTAssertTrue(subject.host == "host")
+    XCTAssertTrue(subject.vhost == "vhost")
+    XCTAssertTrue(subject.username == "username")
+    XCTAssertTrue(subject.password == "password")
+    XCTAssertTrue(subject.name == "name")
+    XCTAssertTrue(subject.port == 1883)
+    XCTAssertTrue(subject.sslport == 8883)
   }
 
 }
