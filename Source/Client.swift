@@ -143,7 +143,10 @@ enum SpaceBunnyError: ErrorType {
    If the connection failed, a non nil error is provided
    */
   public func connect(completion: ((NSError?) -> Void)? = nil) {
-    guard let url = endpointURL() else { return }
+    guard let url = endpointURL() else {
+      completion?(NSError(domain: "SpaceBunnyClient", code: 400, userInfo: ["error": "Non valid URL"]));
+      return
+    }
 
     let request = NSMutableURLRequest(URL: url)
     request.setValue(deviceKey, forHTTPHeaderField: "Device-Key")
@@ -246,15 +249,11 @@ enum SpaceBunnyError: ErrorType {
   }
 
   func endpointURL() -> NSURL? {
-    let components = NSURLComponents()
-    components.scheme = endpointScheme
-    if let port = endpointPort {
-      components.port = port
+    var port = ""
+    if let endpointPort = endpointPort {
+      port = ":\(endpointPort)"
     }
-    components.host = endpointURLString
-    components.path = "/v1/device_configurations"
-
-    return components.URL
+    return NSURL(string: "\(endpointScheme)://\(endpointURLString)\(port)/v1/device_configurations")
   }
 
   func mqttConnect(completion: (NSError? -> Void)? = nil) {

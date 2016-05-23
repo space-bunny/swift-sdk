@@ -55,17 +55,21 @@ class MockClient: SpaceBunnyClient {
 
 class SpaceBunnyTests: XCTestCase {
 
-  func successMock() {
+  func successMock(url: String = "https://api.spacebunny.io/v1/device_configurations") {
     let protocols = ["mqtt": ["port": 1883, "ssl_port": 8883]]
     let channels = [[ "id": "12345", "name": "data" ], [ "id": "54321", "name": "alarms" ]]
     let config = ["host": "mock.host", "device_id": "device", "device_name": "Some device", "secret": "s3cr3t", "vhost": "mock.vhost", "protocols": protocols]
     let body = [ "connection": config, "channels": channels ]
-    stub(http(.GET, uri: "https://api.spacebunny.io/v1/device_configurations"), builder: json(body))
+    stub(http(.GET, uri: url), builder: json(body))
   }
 
   func failueMock() {
     let error = NSError(domain: "MockingjayTests", code: 401, userInfo: nil)
     stub(http(.GET, uri: "https://api.spacebunny.io/v1/device_configurations"), builder: failure(error))
+  }
+
+  func malformedResponseMock() {
+    stub(http(.GET, uri: "https://api.spacebunny.io/v1/device_configurations"), builder: http(200, headers: nil, data: NSData()))
   }
 
   override func setUp() {
@@ -98,6 +102,41 @@ class SpaceBunnyTests: XCTestCase {
     self.waitForExpectationsWithTimeout(0.5, handler: nil)
   }
 
+  func testCustomEndpoint() {
+    successMock("https://endpoint.com:8080/v1/device_configurations")
+    let expectation = self.expectationWithDescription("fetch config")
+
+    let client = MockClient(deviceKey: "some-key", endpointScheme: "https", endpointUrl: "endpoint.com", endpointPort: 8080)
+    client.connect() { _ in
+      XCTAssertTrue(client.configuration?.host == "mock.host")
+      expectation.fulfill()
+    }
+    self.waitForExpectationsWithTimeout(0.5, handler: nil)
+  }
+
+  func testInvalidEndpoint() {
+    let expectation = self.expectationWithDescription("fetch config")
+
+    let client = MockClient(deviceKey: "some-key", endpointScheme: "", endpointUrl: "garbage", endpointPort: nil)
+    client.connect() { error in
+      XCTAssertNotNil(error)
+      expectation.fulfill()
+    }
+    self.waitForExpectationsWithTimeout(0.5, handler: nil)
+  }
+
+  func testMalformedResponse() {
+    let expectation = self.expectationWithDescription("fetch config")
+
+    malformedResponseMock()
+    let client = MockClient(deviceKey: "some-key", endpointScheme: "", endpointUrl: "garbage", endpointPort: nil)
+    client.connect() { error in
+      XCTAssertNotNil(error)
+      expectation.fulfill()
+    }
+    self.waitForExpectationsWithTimeout(0.5, handler: nil)
+  }
+
   func testAuthenticationFailure() {
     failueMock()
     let expectation = self.expectationWithDescription("auth error")
@@ -117,9 +156,25 @@ class SpaceBunnyTests: XCTestCase {
     successMock()
     client.connect() { _ in
       try! client.publishOn("data", message: "Hello")
-      print(client.mqttClient)
       if let mqtt = client.mqttClient as? MockMQTTClient {
         XCTAssertTrue(mqtt.didPublish)
+      }
+      expectation.fulfill()
+    }
+    self.waitForExpectationsWithTimeout(0.5, handler: nil)
+  }
+
+  func testPublishFailure() {
+    let expectation = self.expectationWithDescription("publish success")
+
+    let client = MockClient(deviceKey: "some-key", expectedState: .DISCONNECTED)
+    successMock()
+    client.connect() { _ in
+      do {
+        XCTAssertThrowsError(try client.publishOn("data", message: "Hello"))
+      } catch {}
+      if let mqtt = client.mqttClient as? MockMQTTClient {
+        XCTAssertFalse(mqtt.didPublish)
       }
       expectation.fulfill()
     }
