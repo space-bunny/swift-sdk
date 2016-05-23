@@ -7,8 +7,8 @@ Pod::Spec.new do |s|
                    DESC
   s.homepage     = "https://github.com/space-bunny/Swift-sdk"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
-  s.author       = { "SpaceBunny" => "info@spacebunny.io" }
-  s.source       = { :git => "https://github.com/space-bunny/SpaceBunny.git", :tag => s.version }
+  s.author       = { "Fancy Pixel" => "andrea@fancypixel.it" }
+  s.source       = { :git => "https://github.com/space-bunny/swift-sdk.git", :tag => s.version }
   s.platform     = :ios, '8.0'
   s.source_files = 'Source', '*.{swift}'
   s.requires_arc = true
