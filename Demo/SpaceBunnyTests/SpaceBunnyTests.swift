@@ -15,6 +15,7 @@ class MockMQTTClient: CocoaMQTT {
 
   var expectedState = CocoaMQTTConnState.CONNECTED
   internal var didPublish = false
+  internal var isSubscribed = false
 
   init(expectedState state: CocoaMQTTConnState) {
     expectedState = state
@@ -22,6 +23,12 @@ class MockMQTTClient: CocoaMQTT {
   }
 
   override func subscribe(topic: String, qos: CocoaMQTTQOS) -> UInt16 {
+    isSubscribed = true
+    return 0
+  }
+
+  override func unsubscribe(topic: String) -> UInt16 {
+    isSubscribed = false
     return 0
   }
 
@@ -117,7 +124,7 @@ class SpaceBunnyTests: XCTestCase {
   func testInvalidEndpoint() {
     let expectation = self.expectationWithDescription("fetch config")
 
-    let client = MockClient(deviceKey: "some-key", endpointScheme: "", endpointUrl: "garbage", endpointPort: nil)
+    let client = MockClient(deviceKey: "some-key", endpointScheme: "^^^", endpointUrl: "???", endpointPort: nil)
     client.connect() { error in
       XCTAssertNotNil(error)
       expectation.fulfill()
@@ -129,7 +136,7 @@ class SpaceBunnyTests: XCTestCase {
     let expectation = self.expectationWithDescription("fetch config")
 
     malformedResponseMock()
-    let client = MockClient(deviceKey: "some-key", endpointScheme: "", endpointUrl: "garbage", endpointPort: nil)
+    let client = MockClient(deviceKey: "some-key")
     client.connect() { error in
       XCTAssertNotNil(error)
       expectation.fulfill()
@@ -165,20 +172,52 @@ class SpaceBunnyTests: XCTestCase {
   }
 
   func testPublishFailure() {
-    let expectation = self.expectationWithDescription("publish success")
-
     let client = MockClient(deviceKey: "some-key", expectedState: .DISCONNECTED)
     successMock()
+    XCTAssertThrowsError(try client.publishOn("data", message: "Hello"))
+  }
+
+  func testSubscribeSuccess() {
+    let expectation = self.expectationWithDescription("subscribe success")
+
+    let client = MockClient(deviceKey: "some-key", expectedState: .CONNECTED)
+    successMock()
     client.connect() { _ in
-      do {
-        XCTAssertThrowsError(try client.publishOn("data", message: "Hello"))
-      } catch {}
+      try! client.subscribe(nil)
       if let mqtt = client.mqttClient as? MockMQTTClient {
-        XCTAssertFalse(mqtt.didPublish)
+        XCTAssertTrue(mqtt.isSubscribed)
       }
       expectation.fulfill()
     }
     self.waitForExpectationsWithTimeout(0.5, handler: nil)
+  }
+
+  func testSubscribeFailure() {
+    let client = MockClient(deviceKey: "some-key", expectedState: .DISCONNECTED)
+    successMock()
+    XCTAssertThrowsError(try client.subscribe(nil))
+  }
+
+  func testUnsubscribeSuccess() {
+    let expectation = self.expectationWithDescription("subscribe success")
+
+    let client = MockClient(deviceKey: "some-key", expectedState: .CONNECTED)
+    successMock()
+    client.connect() { _ in
+      try! client.subscribe(nil)
+      try! client.unsubscribe()
+      if let mqtt = client.mqttClient as? MockMQTTClient {
+        XCTAssertFalse(mqtt.isSubscribed)
+      }
+      expectation.fulfill()
+    }
+    self.waitForExpectationsWithTimeout(0.5, handler: nil)
+  }
+
+  func testUnsubscribeFailure() {
+    let client = MockClient(deviceKey: "some-key", expectedState: .DISCONNECTED)
+    successMock()
+    XCTAssertThrowsError(try client.unsubscribe())
   }
 
 }
