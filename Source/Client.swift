@@ -156,6 +156,10 @@ enum SpaceBunnyError: ErrorType {
       if let error = error {
         completion?(error)
       }
+      if let httpResponse = response as? NSHTTPURLResponse where httpResponse.statusCode == 401 {
+        completion?(NSError(domain: "SpaceBunnyClient", code: 401, userInfo: ["error": "Unauthorized. Please check your Device Key"]));
+        return
+      }
       if let data = data {
         do {
           let json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)

@@ -109,6 +109,18 @@ class SpaceBunnyTests: XCTestCase {
     self.waitForExpectationsWithTimeout(0.5, handler: nil)
   }
 
+  func testUnauthorized() {
+    failueMock()
+    let expectation = self.expectationWithDescription("fetch config")
+
+    let client = MockClient(deviceKey: "some-wrong-key")
+    client.connect() { error in
+      XCTAssertTrue(error?.code == 401)
+      expectation.fulfill()
+    }
+    self.waitForExpectationsWithTimeout(0.5, handler: nil)
+  }
+
   func testCustomEndpoint() {
     successMock("https://endpoint.com:8080/v1/device_configurations")
     let expectation = self.expectationWithDescription("fetch config")
