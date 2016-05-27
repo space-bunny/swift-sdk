@@ -14,6 +14,6 @@ Pod::Spec.new do |s|
   s.source_files = 'Source', '*.{swift}'
   s.requires_arc = true
   s.dependency 'ObjectMapper', '~> 1.2'
-  s.dependency 'CocoaMQTT', '~> 1.0.5'
+  s.dependency 'CocoaMQTT', '~> 1.0.7'
   s.social_media_url = 'https://twitter.com/spacebunny_iot'
 end
