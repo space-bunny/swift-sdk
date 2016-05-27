@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "SpaceBunny"
-  s.version      = "0.1.1"
+  s.version      = "0.1.2"
   s.summary      = "Official Swift SDK for SpaceBunny (http://spacebunny.io)"
   s.description  = <<-DESC
                     Official SpaceBunny's SDK for iOS. Used to connect and communicate with the platform. 
